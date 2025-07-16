@@ -28,10 +28,7 @@ const GenerateButton: React.FC<GenerateButtonProps> = ({ onGenerate, isAnimating
           <span className="text-lg">
             {isAnimating ? 'Génération...' : 'Générer une nouvelle équipe'}
           </span>
-        </div>
-        
-        {/* Effet de brillance */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
+        </div>        
       </button>
     </div>
   );
