@@ -1,0 +1,40 @@
+import React from 'react';
+import { Shuffle, Zap } from 'lucide-react';
+
+interface GenerateButtonProps {
+  onGenerate: () => void;
+  isAnimating: boolean;
+}
+
+const GenerateButton: React.FC<GenerateButtonProps> = ({ onGenerate, isAnimating }) => {
+  return (
+    <div className="flex justify-center mb-8">
+      <button
+        onClick={onGenerate}
+        disabled={isAnimating}
+        className={`group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 
+                   text-white font-bold rounded-xl shadow-lg transform transition-all duration-200 
+                   hover:scale-105 hover:shadow-xl disabled:opacity-75 disabled:transform-none
+                   ${isAnimating ? 'animate-pulse' : ''}`}
+      >
+        <div className="flex items-center space-x-3">
+          <div className={`transition-transform duration-300 ${isAnimating ? 'rotate-180' : 'group-hover:rotate-12'}`}>
+            {isAnimating ? (
+              <Zap className="w-6 h-6" />
+            ) : (
+              <Shuffle className="w-6 h-6" />
+            )}
+          </div>
+          <span className="text-lg">
+            {isAnimating ? 'Génération...' : 'Générer une nouvelle équipe'}
+          </span>
+        </div>
+        
+        {/* Effet de brillance */}
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-all duration-700"></div>
+      </button>
+    </div>
+  );
+};
+
+export default GenerateButton;
