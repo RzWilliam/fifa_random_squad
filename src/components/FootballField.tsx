@@ -102,9 +102,9 @@ const FootballField: React.FC<FootballFieldProps> = ({
                 </div>
                 <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white opacity-30 rounded-full"></div>
               </div>
-              <div className="mt-1 bg-yellow-600 text-white text-xs sm:text-xs md:text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-semibold">
+              {/* <div className="mt-1 bg-yellow-600 text-white text-xs sm:text-xs md:text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-semibold">
                 {substitute.position}
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
