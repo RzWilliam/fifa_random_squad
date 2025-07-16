@@ -68,15 +68,15 @@ const FootballField: React.FC<FootballFieldProps> = ({
           >
             <div className="flex flex-col items-center">
               {/* Maillot du joueur */}
-              <div className="relative w-12 h-12 bg-blue-600 rounded-full border-3 border-white shadow-lg hover:scale-110 transition-transform duration-200">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-blue-600 rounded-full border-2 sm:border-3 border-white shadow-lg hover:scale-110 transition-transform duration-200">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">{player.number}</span>
+                  <span className="text-white font-bold text-xs sm:text-xs md:text-sm">{player.number}</span>
                 </div>
                 {/* Effet de brillance */}
-                <div className="absolute top-1 left-1 w-3 h-3 bg-white opacity-30 rounded-full"></div>
+                <div className="absolute top-0.5 left-0.5 sm:top-1 sm:left-1 w-2 h-2 sm:w-3 sm:h-3 bg-white opacity-30 rounded-full"></div>
               </div>
               {/* Position du joueur */}
-              <div className="mt-1 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded-full font-semibold">
+              <div className="mt-1 bg-black bg-opacity-75 text-white text-xs sm:text-xs md:text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-semibold">
                 {player.position}
               </div>
             </div>
@@ -96,15 +96,15 @@ const FootballField: React.FC<FootballFieldProps> = ({
               }`}
               style={{ transitionDelay: `${(players.length + index) * 100}ms` }}
             >
-              <div className="relative w-10 h-10 bg-yellow-500 rounded-full border-2 border-white shadow-lg hover:scale-110 transition-transform duration-200">
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-yellow-500 rounded-full border-2 border-white shadow-lg hover:scale-110 transition-transform duration-200">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-black font-bold text-xs">{substitute.number}</span>
+                  <span className="text-black font-bold text-xs sm:text-xs md:text-sm">{substitute.number}</span>
                 </div>
-                <div className="absolute top-0.5 left-0.5 w-2 h-2 bg-white opacity-30 rounded-full"></div>
+                <div className="absolute top-0.5 left-0.5 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white opacity-30 rounded-full"></div>
               </div>
-              {/* <div className="mt-1 bg-yellow-600 text-white text-xs px-2 py-1 rounded-full font-semibold">
+              <div className="mt-1 bg-yellow-600 text-white text-xs sm:text-xs md:text-sm px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full font-semibold">
                 {substitute.position}
-              </div> */}
+              </div>
             </div>
           ))}
         </div>
