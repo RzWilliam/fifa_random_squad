@@ -4,6 +4,7 @@ import FootballField from "./components/FootballField";
 import GenerateButton from "./components/GenerateButton";
 import FormationSelector from "./components/FormationSelector";
 import StatsPanel from "./components/StatsPanel";
+import SettingsModal from "./components/SettingsModal";
 import { useTeamGenerator } from "./hooks/useTeamGenerator";
 
 function App() {
@@ -12,9 +13,14 @@ function App() {
     players,
     substitutes,
     isAnimating,
+    maxStarterNumber,
+    maxSubstituteNumber,
     generateTeam,
     selectFormation,
+    updateSettings,
   } = useTeamGenerator();
+
+  const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
 
   // Générer une équipe par défaut au chargement
   useEffect(() => {
@@ -34,7 +40,7 @@ function App() {
       ></div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <Header />
+        <Header onSettingsClick={() => setIsSettingsOpen(true)} />
 
         <GenerateButton onGenerate={generateTeam} isAnimating={isAnimating} />
 
@@ -62,6 +68,14 @@ function App() {
             />
           </>
         )}
+
+        <SettingsModal
+          isOpen={isSettingsOpen}
+          onClose={() => setIsSettingsOpen(false)}
+          maxStarterNumber={maxStarterNumber}
+          maxSubstituteNumber={maxSubstituteNumber}
+          onSettingsChange={updateSettings}
+        />
 
         {/* Footer */}
         <footer className="text-center mt-12 text-gray-500">

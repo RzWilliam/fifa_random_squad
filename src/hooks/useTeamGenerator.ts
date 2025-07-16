@@ -2,10 +2,6 @@ import { useState, useCallback } from "react";
 import { formations, Formation } from "../types/formations";
 import { Player } from "../types/formations";
 
-const generateRandomNumber = (min: number, max: number): number => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 const generateRandomId = (): string => {
   return Math.random().toString(36).substr(2, 9);
 };
@@ -19,29 +15,41 @@ export const useTeamGenerator = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [substitutes, setSubstitutes] = useState<Player[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [maxStarterNumber, setMaxStarterNumber] = useState(20);
+  const [maxSubstituteNumber, setMaxSubstituteNumber] = useState(60);
 
-  const generatePlayersForFormation = useCallback((formation: Formation) => {
-    // Générer les joueurs titulaires
-    const newPlayers: Player[] = formation.players.map((playerTemplate) => ({
-      id: generateRandomId(),
-      position: playerTemplate.position,
-      number: generateRandomNumber(1, 20),
-      x: playerTemplate.x,
-      y: playerTemplate.y,
-    }));
+  const generateRandomNumber = useCallback(
+    (min: number, max: number): number => {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    []
+  );
 
-    // Générer les remplaçants
-    const newSubstitutes: Player[] = substitutePositions.map((position) => ({
-      id: generateRandomId(),
-      position,
-      number: generateRandomNumber(1, 60),
-      x: 0,
-      y: 0,
-    }));
+  const generatePlayersForFormation = useCallback(
+    (formation: Formation) => {
+      // Générer les joueurs titulaires
+      const newPlayers: Player[] = formation.players.map((playerTemplate) => ({
+        id: generateRandomId(),
+        position: playerTemplate.position,
+        number: generateRandomNumber(1, maxStarterNumber),
+        x: playerTemplate.x,
+        y: playerTemplate.y,
+      }));
 
-    setPlayers(newPlayers);
-    setSubstitutes(newSubstitutes);
-  }, []);
+      // Générer les remplaçants
+      const newSubstitutes: Player[] = substitutePositions.map((position) => ({
+        id: generateRandomId(),
+        position,
+        number: generateRandomNumber(1, maxSubstituteNumber),
+        x: 0,
+        y: 0,
+      }));
+
+      setPlayers(newPlayers);
+      setSubstitutes(newSubstitutes);
+    },
+    [maxStarterNumber, maxSubstituteNumber, generateRandomNumber]
+  );
 
   const generateTeam = useCallback(() => {
     setIsAnimating(true);
@@ -69,12 +77,23 @@ export const useTeamGenerator = () => {
     [generatePlayersForFormation]
   );
 
+  const updateSettings = useCallback(
+    (maxStarter: number, maxSubstitute: number) => {
+      setMaxStarterNumber(maxStarter);
+      setMaxSubstituteNumber(maxSubstitute);
+    },
+    []
+  );
+
   return {
     currentFormation,
     players,
     substitutes,
     isAnimating,
+    maxStarterNumber,
+    maxSubstituteNumber,
     generateTeam,
     selectFormation,
+    updateSettings,
   };
 };
