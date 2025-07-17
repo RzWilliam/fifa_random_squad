@@ -108,7 +108,7 @@ Each formation includes:
 
 ## 🔄 Future Enhancements
 
-- English translation
+- **?**
 
 ## 🤝 Contributing
 
