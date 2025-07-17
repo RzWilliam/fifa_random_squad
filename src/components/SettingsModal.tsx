@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X, Settings, Users, UserCheck } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   maxSubstituteNumber,
   onSettingsChange,
 }) => {
+  const { t } = useLanguage();
   const [tempMaxStarter, setTempMaxStarter] = useState(maxStarterNumber);
   const [tempMaxSubstitute, setTempMaxSubstitute] =
     useState(maxSubstituteNumber);
@@ -54,7 +56,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
               <Settings className="w-5 h-5 text-white" />
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-white">
-              Paramètres
+              {t("settings.title")}
             </h2>
           </div>
           <button
@@ -68,8 +70,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
         {/* Content */}
         <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           <div className="text-gray-300 text-xs sm:text-sm">
-            Personnalisez les numéros maximum pour les joueurs titulaires et
-            remplaçants.
+            {t("settings.description")}
           </div>
 
           {/* Titulaires */}
@@ -79,13 +80,13 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                 <Users className="w-4 h-4 text-white" />
               </div>
               <label className="text-white font-semibold text-sm sm:text-base">
-                Joueurs titulaires
+                {t("settings.starters")}
               </label>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-gray-400 text-xs sm:text-sm">
-                  Numéro maximum
+                  {t("settings.maxNumber")}
                 </span>
                 <span className="text-blue-400 font-mono text-sm sm:text-base">
                   {tempMaxStarter}
@@ -113,13 +114,13 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                 <UserCheck className="w-4 h-4 text-white" />
               </div>
               <label className="text-white font-semibold text-sm sm:text-base">
-                Remplaçants
+                {t("settings.substitutes")}
               </label>
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-gray-400 text-xs sm:text-sm">
-                  Numéro maximum
+                  {t("settings.maxNumber")}
                 </span>
                 <span className="text-yellow-400 font-mono text-sm sm:text-base">
                   {tempMaxSubstitute}
@@ -143,7 +144,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
           {/* Preview */}
           <div className="bg-gray-900 rounded-lg p-3 sm:p-4">
             <h4 className="text-white font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
-              Aperçu
+              {t("settings.preview")}
             </h4>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0 text-xs sm:text-sm">
               <div className="flex items-center space-x-2">
@@ -153,7 +154,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   </span>
                 </div>
                 <span className="text-gray-300">
-                  Titulaire (1-{tempMaxStarter})
+                  {t("settings.starter")} (1-{tempMaxStarter})
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -163,7 +164,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   </span>
                 </div>
                 <span className="text-gray-300">
-                  Remplaçant (1-{tempMaxSubstitute})
+                  {t("settings.substitute")} (1-{tempMaxSubstitute})
                 </span>
               </div>
             </div>
@@ -176,26 +177,26 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             onClick={handleReset}
             className="w-full sm:w-auto px-4 py-2 text-gray-400 hover:text-white transition-colors duration-200 hover:bg-gray-700 rounded-lg text-sm sm:text-base"
           >
-            Réinitialiser
+            {t("settings.reset")}
           </button>
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
             <button
               onClick={onClose}
               className="w-full sm:w-auto px-4 py-2 text-gray-400 hover:text-white transition-colors duration-200 hover:bg-gray-700 rounded-lg text-sm sm:text-base"
             >
-              Annuler
+              {t("settings.cancel")}
             </button>
             <button
               onClick={handleSave}
               className="w-full sm:w-auto px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200 hover:scale-105 text-sm sm:text-base"
             >
-              Sauvegarder
+              {t("settings.save")}
             </button>
           </div>
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .slider::-webkit-slider-thumb {
           appearance: none;
           height: 20px;

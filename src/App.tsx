@@ -6,8 +6,10 @@ import FormationSelector from "./components/FormationSelector";
 import StatsPanel from "./components/StatsPanel";
 import SettingsModal from "./components/SettingsModal";
 import { useTeamGenerator } from "./hooks/useTeamGenerator";
+import { useLanguage } from "./contexts/LanguageContext";
 
 function App() {
+  const { t } = useLanguage();
   const {
     currentFormation,
     players,
@@ -79,10 +81,7 @@ function App() {
 
         {/* Footer */}
         <footer className="text-center mt-12 text-gray-500">
-          <p className="text-sm">
-            Générateur FIFA Ultimate Team - Toutes les formations officielles
-            incluses
-          </p>
+          <p className="text-sm">{t("footer.text")}</p>
         </footer>
       </div>
     </div>

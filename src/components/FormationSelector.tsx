@@ -1,6 +1,7 @@
 import React from "react";
 import { formations, Formation } from "../types/formations";
 import { Settings } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface FormationSelectorProps {
   currentFormation: Formation | null;
@@ -13,6 +14,8 @@ const FormationSelector: React.FC<FormationSelectorProps> = ({
   onFormationSelect,
   isAnimating,
 }) => {
+  const { t } = useLanguage();
+
   const handleFormationChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -31,7 +34,7 @@ const FormationSelector: React.FC<FormationSelectorProps> = ({
           <div className="flex items-center text-gray-300">
             <Settings className="w-5 h-5 mr-2 text-blue-400" />
             <label htmlFor="formation-select" className="font-semibold">
-              Choisir une formation :
+              {t("formation.choose")}
             </label>
           </div>
 
@@ -50,7 +53,7 @@ const FormationSelector: React.FC<FormationSelectorProps> = ({
                        }`}
           >
             <option value="" disabled>
-              Sélectionner...
+              {t("formation.select")}
             </option>
             {formations.map((formation) => (
               <option key={formation.code} value={formation.code}>
