@@ -306,7 +306,7 @@ export const formations: Formation[] = [
     players: [
       { position: "G", x: 50, y: 90 },
       { position: "DD", x: 85, y: 75 }, { position: "DC", x: 65, y: 80 }, { position: "DC", x: 50, y: 80 }, { position: "DC", x: 35, y: 80 }, { position: "DG", x: 15, y: 75 },
-      { position: "MC", x: 65, y: 50 }, { position: "MC", x: 50, y: 50 }, { position: "MC", x: 35, y: 50 },
+      { position: "MC", x: 65, y: 50 }, { position: "MDC", x: 50, y: 55 }, { position: "MC", x: 35, y: 50 },
       { position: "BU", x: 60, y: 25 }, { position: "BU", x: 40, y: 25 }
     ]
   },
