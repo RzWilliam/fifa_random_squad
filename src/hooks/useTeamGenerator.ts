@@ -6,8 +6,6 @@ const generateRandomId = (): string => {
   return Math.random().toString(36).substr(2, 9);
 };
 
-const substitutePositions = ["DEF", "MIL", "ATT"];
-
 export const useTeamGenerator = () => {
   const [currentFormation, setCurrentFormation] = useState<Formation | null>(
     null
@@ -17,6 +15,7 @@ export const useTeamGenerator = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [maxStarterNumber, setMaxStarterNumber] = useState(20);
   const [maxSubstituteNumber, setMaxSubstituteNumber] = useState(60);
+  const [substituteCount, setSubstituteCount] = useState(3);
 
   const generateRandomNumber = useCallback(
     (min: number, max: number): number => {
@@ -37,18 +36,26 @@ export const useTeamGenerator = () => {
       }));
 
       // Générer les remplaçants
-      const newSubstitutes: Player[] = substitutePositions.map((position) => ({
-        id: generateRandomId(),
-        position,
-        number: generateRandomNumber(1, maxSubstituteNumber),
-        x: 0,
-        y: 0,
-      }));
+      const newSubstitutes: Player[] = [];
+      for (let i = 0; i < substituteCount; i++) {
+        newSubstitutes.push({
+          id: generateRandomId(),
+          position: "SUB",
+          number: generateRandomNumber(1, maxSubstituteNumber),
+          x: 0,
+          y: 0,
+        });
+      }
 
       setPlayers(newPlayers);
       setSubstitutes(newSubstitutes);
     },
-    [maxStarterNumber, maxSubstituteNumber, generateRandomNumber]
+    [
+      maxStarterNumber,
+      maxSubstituteNumber,
+      substituteCount,
+      generateRandomNumber,
+    ]
   );
 
   const generateTeam = useCallback(() => {
@@ -78,9 +85,10 @@ export const useTeamGenerator = () => {
   );
 
   const updateSettings = useCallback(
-    (maxStarter: number, maxSubstitute: number) => {
+    (maxStarter: number, maxSubstitute: number, subCount: number) => {
       setMaxStarterNumber(maxStarter);
       setMaxSubstituteNumber(maxSubstitute);
+      setSubstituteCount(subCount);
     },
     []
   );
@@ -92,6 +100,7 @@ export const useTeamGenerator = () => {
     isAnimating,
     maxStarterNumber,
     maxSubstituteNumber,
+    substituteCount,
     generateTeam,
     selectFormation,
     updateSettings,

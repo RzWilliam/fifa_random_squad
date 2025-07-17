@@ -7,7 +7,12 @@ interface SettingsModalProps {
   onClose: () => void;
   maxStarterNumber: number;
   maxSubstituteNumber: number;
-  onSettingsChange: (maxStarter: number, maxSubstitute: number) => void;
+  substituteCount: number;
+  onSettingsChange: (
+    maxStarter: number,
+    maxSubstitute: number,
+    subCount: number
+  ) => void;
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -15,26 +20,31 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose,
   maxStarterNumber,
   maxSubstituteNumber,
+  substituteCount,
   onSettingsChange,
 }) => {
   const { t } = useLanguage();
   const [tempMaxStarter, setTempMaxStarter] = useState(maxStarterNumber);
   const [tempMaxSubstitute, setTempMaxSubstitute] =
     useState(maxSubstituteNumber);
+  const [tempSubstituteCount, setTempSubstituteCount] =
+    useState(substituteCount);
 
   useEffect(() => {
     setTempMaxStarter(maxStarterNumber);
     setTempMaxSubstitute(maxSubstituteNumber);
-  }, [maxStarterNumber, maxSubstituteNumber]);
+    setTempSubstituteCount(substituteCount);
+  }, [maxStarterNumber, maxSubstituteNumber, substituteCount]);
 
   const handleSave = () => {
-    onSettingsChange(tempMaxStarter, tempMaxSubstitute);
+    onSettingsChange(tempMaxStarter, tempMaxSubstitute, tempSubstituteCount);
     onClose();
   };
 
   const handleReset = () => {
     setTempMaxStarter(20);
     setTempMaxSubstitute(60);
+    setTempSubstituteCount(3);
   };
 
   if (!isOpen) return null;
@@ -107,6 +117,42 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           </div>
 
+          {/* Nombre de remplaçants */}
+          <div className="space-y-2 sm:space-y-3">
+            <div className="flex items-center space-x-3">
+              <div className="bg-yellow-600 p-2 rounded-lg">
+                <UserCheck className="w-4 h-4 text-white" />
+              </div>
+              <label className="text-white font-semibold text-sm sm:text-base">
+                {t("settings.substituteCount")}
+              </label>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-gray-400 text-xs sm:text-sm">
+                  {t("settings.numberOfSubstitutes")}
+                </span>
+                <span className="text-yellow-400 font-mono text-sm sm:text-base">
+                  {tempSubstituteCount}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="1"
+                max="7"
+                value={tempSubstituteCount}
+                onChange={(e) =>
+                  setTempSubstituteCount(parseInt(e.target.value))
+                }
+                className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+              />
+              <div className="flex justify-between text-xs sm:text-xs text-gray-500">
+                <span>1</span>
+                <span>7</span>
+              </div>
+            </div>
+          </div>
+
           {/* Remplaçants */}
           <div className="space-y-2 sm:space-y-3">
             <div className="flex items-center space-x-3">
@@ -146,7 +192,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             <h4 className="text-white font-semibold mb-2 sm:mb-3 text-sm sm:text-base">
               {t("settings.preview")}
             </h4>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0 text-xs sm:text-sm">
+            <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-600 rounded-full flex items-center justify-center">
                   <span className="text-white text-xs sm:text-xs font-bold">
@@ -157,15 +203,28 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   {t("settings.starter")} (1-{tempMaxStarter})
                 </span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-                  <span className="text-black text-xs sm:text-xs font-bold">
-                    {Math.floor(Math.random() * tempMaxSubstitute) + 1}
-                  </span>
+              <div className="space-y-2">
+                <div className="text-gray-400 text-xs">
+                  {tempSubstituteCount}{" "}
+                  {t("settings.substitutes").toLowerCase()}
                 </div>
-                <span className="text-gray-300">
+                <div className="flex items-center space-x-2 flex-wrap gap-1">
+                  {Array.from({ length: tempSubstituteCount }, (_, i) => (
+                    <div key={i} className="flex items-center space-x-1">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-yellow-500 rounded-full flex items-center justify-center">
+                        <span className="text-black text-xs sm:text-xs font-bold">
+                          {Math.floor(Math.random() * tempMaxSubstitute) + 1}
+                        </span>
+                      </div>
+                      {i < tempSubstituteCount - 1 && (
+                        <span className="text-gray-500">•</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <div className="text-gray-400 text-xs">
                   {t("settings.substitute")} (1-{tempMaxSubstitute})
-                </span>
+                </div>
               </div>
             </div>
           </div>

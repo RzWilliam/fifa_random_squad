@@ -40,6 +40,8 @@ const translations = {
       "Personnalisez les numéros maximum pour les joueurs titulaires et remplaçants.",
     "settings.starters": "Joueurs titulaires",
     "settings.substitutes": "Remplaçants",
+    'settings.substituteCount': 'Nombre de remplaçants',
+    'settings.numberOfSubstitutes': 'Nombre de remplaçants',
     "settings.maxNumber": "Numéro maximum",
     "settings.preview": "Aperçu",
     "settings.starter": "Titulaire",
@@ -68,6 +70,7 @@ const translations = {
     "position.DEF": "DEF",
     "position.MIL": "MIL",
     "position.ATT": "ATT",
+    'position.SUB': 'REMP',
   },
   en: {
     // Header
@@ -100,6 +103,8 @@ const translations = {
       "Customize the maximum numbers for starting players and substitutes.",
     "settings.starters": "Starting Players",
     "settings.substitutes": "Substitutes",
+    'settings.substituteCount': 'Number of substitutes',
+    'settings.numberOfSubstitutes': 'Number of substitutes',
     "settings.maxNumber": "Maximum number",
     "settings.preview": "Preview",
     "settings.starter": "Starter",
@@ -128,6 +133,7 @@ const translations = {
     "position.DEF": "DEF",
     "position.MIL": "MID",
     "position.ATT": "ATT",
+    'position.SUB': 'SUB',
   },
 };
 

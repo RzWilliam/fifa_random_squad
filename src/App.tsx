@@ -17,6 +17,7 @@ function App() {
     isAnimating,
     maxStarterNumber,
     maxSubstituteNumber,
+    substituteCount,
     generateTeam,
     selectFormation,
     updateSettings,
@@ -76,6 +77,7 @@ function App() {
           onClose={() => setIsSettingsOpen(false)}
           maxStarterNumber={maxStarterNumber}
           maxSubstituteNumber={maxSubstituteNumber}
+          substituteCount={substituteCount}
           onSettingsChange={updateSettings}
         />
 
