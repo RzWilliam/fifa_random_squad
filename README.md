@@ -1,11 +1,11 @@
-# FIFA Ultimate Team Random Squad Generator
+# FC Ultimate Team Random Squad Generator
 
-A modern, interactive web application that generates random FIFA Ultimate Team squads with authentic football formations and player positioning.
+A modern, interactive web application that generates random FC Ultimate Team squads with authentic football formations and player positioning.
 
 ## 🚀 Features
 
-- **Random Team Generation**: Generate complete FIFA Ultimate Team squads with realistic player numbers
-- **Multiple Formations**: Support for 20+ official FIFA formations (3-1-4-2, 4-3-3, 4-4-2, etc.)
+- **Random Team Generation**: Generate complete FC Ultimate Team squads with realistic player numbers
+- **Multiple Formations**: Support for 20+ official FC formations (3-1-4-2, 4-3-3, 4-4-2, etc.)
 - **Interactive Football Field**: Visual representation of players on a realistic football pitch
 - **Dynamic Player Positioning**: Accurate player placement based on formation tactics
 - **Substitute Players**: Generate substitute players for defensive, midfield, and attacking positions
@@ -17,7 +17,7 @@ A modern, interactive web application that generates random FIFA Ultimate Team s
 ## 🎮 How to Use
 
 1. **Generate Team**: Click the "Générer une équipe" button to create a random squad
-2. **Select Formation**: Choose from various FIFA formations using the formation selector
+2. **Select Formation**: Choose from various FC formations using the formation selector
 3. **Customize Settings**: Use the settings modal to adjust maximum player numbers
 4. **View Stats**: Check team statistics and formation details in the stats panel
 5. **Visual Field**: See your team positioned on an authentic football field
@@ -64,7 +64,7 @@ npm run dev
 
 ## 🎯 Formations Included
 
-The application includes all major FIFA formations:
+The application includes all major FC formations:
 - 3-1-4-2
 - 3-4-1-2
 - 3-4-2-1
@@ -124,7 +124,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgments
 
-- FIFA for the formation inspiration
+- FC for the formation inspiration
 - Football tactics and positioning references
 - React and TypeScript communities
 - Tailwind CSS for the styling framework
@@ -135,4 +135,4 @@ If you encounter any issues or have suggestions, please open an issue on GitHub.
 
 ---
 
-**Made with ⚽ for FIFA Ultimate Team enthusiasts**
+**Made with ⚽ for FC Ultimate Team enthusiasts**
