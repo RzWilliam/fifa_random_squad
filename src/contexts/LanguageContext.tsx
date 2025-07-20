@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 export type Language = "en" | "fr";
 
+const LANGUAGE_STORAGE_KEY = 'fifa-team-generator-language';
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -40,8 +42,8 @@ const translations = {
       "Personnalisez les numéros maximum pour les joueurs titulaires et remplaçants.",
     "settings.starters": "Joueurs titulaires",
     "settings.substitutes": "Remplaçants",
-    'settings.substituteCount': 'Nombre de remplaçants',
-    'settings.numberOfSubstitutes': 'Nombre de remplaçants',
+    "settings.substituteCount": "Nombre de remplaçants",
+    "settings.numberOfSubstitutes": "Nombre de remplaçants",
     "settings.maxNumber": "Numéro maximum",
     "settings.preview": "Aperçu",
     "settings.starter": "Titulaire",
@@ -70,7 +72,7 @@ const translations = {
     "position.DEF": "DEF",
     "position.MIL": "MIL",
     "position.ATT": "ATT",
-    'position.SUB': 'REMP',
+    "position.SUB": "REMP",
   },
   en: {
     // Header
@@ -103,8 +105,8 @@ const translations = {
       "Customize the maximum numbers for starting players and substitutes.",
     "settings.starters": "Starting Players",
     "settings.substitutes": "Substitutes",
-    'settings.substituteCount': 'Number of substitutes',
-    'settings.numberOfSubstitutes': 'Number of substitutes',
+    "settings.substituteCount": "Number of substitutes",
+    "settings.numberOfSubstitutes": "Number of substitutes",
     "settings.maxNumber": "Maximum number",
     "settings.preview": "Preview",
     "settings.starter": "Starter",
@@ -133,7 +135,7 @@ const translations = {
     "position.DEF": "DEF",
     "position.MIL": "MID",
     "position.ATT": "ATT",
-    'position.SUB': 'SUB',
+    "position.SUB": "SUB",
   },
 };
 
@@ -144,7 +146,25 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>("en");
+  // Charger la langue depuis localStorage ou utiliser 'fr' par défaut
+  const [language, setLanguage] = useState<Language>(() => {
+    try {
+      const savedLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+      return (savedLanguage as Language) || "en";
+    } catch {
+      return "fr";
+    }
+  });
+
+  // Fonction pour changer la langue et la sauvegarder
+  const changeLanguage = (lang: Language) => {
+    setLanguage(lang);
+    try {
+      localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+    } catch (error) {
+      console.warn('Failed to save language to localStorage:', error);
+    }
+  };
 
   const t = (key: string): string => {
     return (
@@ -153,7 +173,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage: changeLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
