@@ -7,6 +7,7 @@ import StatsPanel from "./components/StatsPanel";
 import SettingsModal from "./components/SettingsModal";
 import { useTeamGenerator } from "./hooks/useTeamGenerator";
 import { useLanguage } from "./contexts/LanguageContext";
+import { Analytics } from "@vercel/analytics/react"; // Importing Analytics from Vercel
 
 function App() {
   const { t } = useLanguage();
@@ -86,6 +87,7 @@ function App() {
           <p className="text-sm">{t("footer.text")}</p>
         </footer>
       </div>
+      <Analytics />
     </div>
   );
 }
